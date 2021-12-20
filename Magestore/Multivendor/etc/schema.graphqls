@@ -1,39 +1,10 @@
 type Query {
-    vendorproduct(
-        id_product: Int @doc(description:"id of product")
-    ): vendorproduct @resolver(class: "Magestore\\Multivendor\\Model\\Resolver\\Test") @doc(description: "Get Product collection of a store")
-    vendorcategories (
-        category_id : Int @deprecated @doc(description: "Filter by the unique parent category ID for a `CategoryInterface` object.")
-    ): CategoryList @resolver(class: "Magestore\\Multivendor\\Model\\Resolver\\VendorCat") 
     vendors(
         vendorid: Int
     ): VendorDetails @resolver(class: "Magestore\\Multivendor\\Model\\Resolver\\VendorProduct")
 }
-type vendorproduct @doc(description: "product collection comment") {
-    allProducts: [vendorRecord] @doc(description: "Product records with info")
-}
-type CategoryList @doc(description: "A collection of CategoryTree objects and pagination information.") {
-    items: [VendorCat] @doc(description: "A list of categories that match the filter criteria.")
-}
 type VendorDetails {
     vendetail: [Details] @doc(description: "A list of vendor that match the filter criteria.")
-}
-type vendorRecord {
-    sku: String @doc(description: "Get Product sku")
-    name: String @doc(description: "Get Product name") 
-}
-type VendorCat {
-	name: String
-    catadd: [Childcat]
-    productadd: [ChildPro]
-}
-type ChildPro {
-    sku: String
-    name: String
-}
-type Childcat {
-    name: String
-    cat_id: Int
 }
 
 type Details { 
@@ -55,4 +26,3 @@ type Collectionpro {
     created_at:String
     updated_at:String
 }
-
